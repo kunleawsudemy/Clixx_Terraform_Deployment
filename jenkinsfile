@@ -4,11 +4,6 @@ pipeline {
   credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', name: 'AWS', required: false
 }
 
-def getTerraformPath(){
-        def tfHome= tool name: 'terraform-14', type: 'terraform'
-        return tfHome
-    }
-
 }
     environment {
         PATH = "${PATH}:${getTerraformPath()}"
@@ -54,6 +49,11 @@ def getTerraformPath(){
                  sh "terraform apply  -input=false tfplan"
             }
         }
+    
+def getTerraformPath(){
+        def tfHome= tool name: 'terraform-14', type: 'terraform'
+        return tfHome
+    }
   
 
 }
